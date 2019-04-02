@@ -16,12 +16,16 @@ function getBreedImage(breed) {
         .then(responseJson =>
             displayResults(responseJson, breed))
         .catch(error => alert("I'm sorry, we don't have any images of that breed. Please try another entry."));
-        
+                
 }
 
 function displayResults(responseJson, breed) {
  
     let pictureArray = responseJson.message;
+
+    if (responseJson.status === "error") {
+        return alert("I'm sorry, we don't have any images of that breed. Please try another entry.");
+    }
    
     if (breed) {
         $('.results-header').html(`Look at this ${breed}!`);
